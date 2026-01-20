@@ -1,6 +1,9 @@
-
 pipeline {
     agent any
+
+    tools {
+        maven 'maven3'
+    }
 
     options {
         timestamps()
@@ -19,6 +22,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Building branch: ${env.BRANCH_NAME}"
+                sh 'mvn -version'
                 sh 'mvn clean package -DskipTests'
             }
         }
@@ -61,13 +65,3 @@ pipeline {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
